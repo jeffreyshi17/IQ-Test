@@ -1,17 +1,31 @@
-var w = 5;
-var h = 5;
+var w = 10;
+var h = 10;
 rowHints = [];
 columnHints = [];
-rowHints.push([2, 1]);
-rowHints.push([4]);
-rowHints.push([1, 1]);
-rowHints.push([4]);
-rowHints.push([1, 2]);
-columnHints.push([1, 2]);
-columnHints.push([4]);
-columnHints.push([1, 1]);
-columnHints.push([4]);
+
+rowHints.push([1, 1, 1]);
+rowHints.push([1, 1, 1]);
+rowHints.push([]);
+rowHints.push([7]);
+rowHints.push([2,6]);
+rowHints.push([2,4, 1]);
+rowHints.push([8]);
+rowHints.push([7]);
+rowHints.push([1, 5, 1]);
+rowHints.push([8]);
+
+columnHints.push([1]);
+columnHints.push([5, 1]);
+columnHints.push([2, 7]);
+columnHints.push([1, 4]);
+columnHints.push([2, 7]);
+columnHints.push([7]);
+columnHints.push([2, 7]);
+columnHints.push([5, 1]);
+columnHints.push([1, 1, 1]);
 columnHints.push([2, 1]);
+
+
 var rHL = Math.max.apply(Math, rowHints.map(function (el) {
     return el.length
 }));
