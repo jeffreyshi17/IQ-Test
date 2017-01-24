@@ -51,13 +51,11 @@ function tableCreate(_w, _h) {
     }
     container.append(tbl);
 }
-$('#tbl').find('td').on("mousedown mosueover", (function (e) {
+$('#tbl').find('td').on("click", (function () {
     //console.log(this.parentNode.rowIndex + 1, this.cellIndex + 1);
-    if (e.buttons == 1 || e.buttons == 3) {
         $(this).toggleClass("on off");
-        checkWin();
     }
-}));
+));
 
 function checkWin() {
     var table = document.getElementById("tbl");
