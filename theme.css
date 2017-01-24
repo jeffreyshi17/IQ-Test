@@ -1,0 +1,28 @@
+body {
+    margin: 40px auto;
+    max-width: 650px;
+    font-size: 18px;
+    color: #444;
+    padding: 0 10px
+}
+
+.on {
+    background-color: black;
+}
+
+.off {
+    background-color: white;
+}
+
+.hint {
+    background-color: antiquewhite;
+}
+
+.hintcross {
+    background-color: burlywood;
+}
+
+td {
+    min-width: 30px;
+    height: 30px;
+}
