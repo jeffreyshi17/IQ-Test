@@ -61,11 +61,26 @@ function tableCreate(_w, _h) {
     }
     container.append(tbl);
 }
-$('#tbl').find('td').on("click", (function () {
+var mouseDown = 0;
+document.body.onmousedown = function () {
+    ++mouseDown;
+}
+document.body.onmouseup = function () {
+    --mouseDown;
+}
+$('#tbl').find('td').on("mouseover", (function (e) {
+    //console.log(this.parentNode.rowIndex + 1, this.cellIndex + 1);
+    if (e.buttons == 1) {
+        $(this).toggleClass("on off");
+        checkWin();
+    }
+}));
+$('#tbl').find('td').on("mousedown", (function () {
     //console.log(this.parentNode.rowIndex + 1, this.cellIndex + 1);
     $(this).toggleClass("on off");
     checkWin();
 }));
+var isHovered = $('#elem').is(":hover");
 
 function checkWin() {
     var table = document.getElementById("tbl");
@@ -150,10 +165,6 @@ function checkWin() {
         }
         if (failed || index != hints.length) {
             columnCheck = false;
-            console.log("fail", j-2);
-        }
-        else {
-            console.log("success", j-2);
         }
     }
     if (rowCheck && columnCheck) {
