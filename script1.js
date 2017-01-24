@@ -147,9 +147,4 @@ function checkWin() {
     if (rowCheck && columnCheck) {
         alert("Congrats, you win.");
     }
-    /*
-    for (var j = cHL; j = table.rows[0].cells.length;  j++) {
-        for (var i = rHL, row; row = table.rows[i]; i++) {}
-    }
-    */
 }
