@@ -5,7 +5,7 @@ columnHints = [];
 
 rowHints.push([1, 1, 1]);
 rowHints.push([1, 1, 1]);
-rowHints.push([]);
+rowHints.push([1]);
 rowHints.push([7]);
 rowHints.push([2,6]);
 rowHints.push([2,4, 1]);
@@ -14,7 +14,7 @@ rowHints.push([7]);
 rowHints.push([1, 5, 1]);
 rowHints.push([8]);
 
-columnHints.push([1]);
+columnHints.push([1, 1]);
 columnHints.push([5, 1]);
 columnHints.push([2, 7]);
 columnHints.push([1, 4]);
@@ -51,10 +51,10 @@ function tableCreate(_w, _h) {
             } else if (i < cHL || j < rHL) {
                 td.className = 'hint';
                 if (i < cHL) {
-                    td.appendChild(document.createTextNode(columnHints[j - rHL][cHL - 1 - i] || ""));
+                    td.appendChild(document.createTextNode(columnHints[j - rHL][i-cHL+columnHints[j - cHL].length] || ""));
                 }
                 if (j < rHL) {
-                    td.appendChild(document.createTextNode(rowHints[i - cHL][rHL - 1 - j] || ""));
+                    td.appendChild(document.createTextNode(rowHints[i - cHL][j-rHL+rowHints[i - cHL].length] || ""));
                 }
             } else {
                 td.className = 'off';
