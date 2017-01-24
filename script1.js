@@ -135,6 +135,8 @@ function checkWin() {
         }
     }
     if (rowCheck && columnCheck) {
-        alert("Congrats, you win.");
+        setTimeout(function () {
+            alert("Congrats, you win.");
+        }, 10)
     }
 }
