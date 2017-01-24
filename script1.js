@@ -21,8 +21,8 @@ var cHL = Math.max.apply(Math, columnHints.map(function (el) {
 tableCreate(w, h);
 
 function tableCreate(_w, _h) {
-    var container = $("#container")
-        , tbl = document.createElement('table');
+    var container = $("#container"),
+        tbl = document.createElement('table');
     tbl.id = "tbl";
     tbl.style.width = '100px';
     tbl.style.border = '1px solid black';
@@ -34,8 +34,7 @@ function tableCreate(_w, _h) {
             td.style.border = '1px solid gray';
             if (i < cHL && j < rHL) {
                 td.className = 'hintcross';
-            }
-            else if (i < cHL || j < rHL) {
+            } else if (i < cHL || j < rHL) {
                 td.className = 'hint';
                 if (i < cHL) {
                     td.appendChild(document.createTextNode(columnHints[j - rHL][rHL - 1 - i] || ""));
@@ -43,8 +42,7 @@ function tableCreate(_w, _h) {
                 if (j < rHL) {
                     td.appendChild(document.createTextNode(columnHints[i - cHL][cHL - 1 - j] || ""));
                 }
-            }
-            else {
+            } else {
                 td.className = 'off';
             }
         }
@@ -53,9 +51,9 @@ function tableCreate(_w, _h) {
 }
 $('#tbl').find('td').on("click", (function () {
     //console.log(this.parentNode.rowIndex + 1, this.cellIndex + 1);
-        $(this).toggleClass("on off");
-    }
-));
+    $(this).toggleClass("on off");
+    checkWin();
+}));
 
 function checkWin() {
     var table = document.getElementById("tbl");
@@ -77,21 +75,18 @@ function checkWin() {
                         if (consecutive == hint) {
                             consecutive = 0;
                             index++;
-                        }
-                        else {
+                        } else {
                             failed = true;
                             break;
                         }
                     }
                 }
-            }
-            else {
+            } else {
                 if (consecutive != 0) {
                     if (consecutive == hint) {
                         consecutive = 0;
                         index++;
-                    }
-                    else {
+                    } else {
                         failed = true;
                         break;
                     }
@@ -117,21 +112,18 @@ function checkWin() {
                         if (consecutive == hint) {
                             consecutive = 0;
                             index++;
-                        }
-                        else {
+                        } else {
                             failed = true;
                             break;
                         }
                     }
                 }
-            }
-            else {
+            } else {
                 if (consecutive != 0) {
                     if (consecutive == hint) {
                         consecutive = 0;
                         index++;
-                    }
-                    else {
+                    } else {
                         failed = true;
                         break;
                     }
