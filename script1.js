@@ -2,16 +2,16 @@ var w = 5;
 var h = 5;
 rowHints = [];
 columnHints = [];
-rowHints.push([3]);
-rowHints.push([2, 2]);
+rowHints.push([2, 1]);
+rowHints.push([4]);
 rowHints.push([1, 1]);
-rowHints.push([2, 2]);
-rowHints.push([3]);
-columnHints.push([3]);
-columnHints.push([2, 2]);
+rowHints.push([4]);
+rowHints.push([1, 2]);
+columnHints.push([1, 2]);
+columnHints.push([4]);
 columnHints.push([1, 1]);
-columnHints.push([2, 2]);
-columnHints.push([3]);
+columnHints.push([4]);
+columnHints.push([2, 1]);
 var rHL = Math.max.apply(Math, rowHints.map(function (el) {
     return el.length
 }));
@@ -37,10 +37,10 @@ function tableCreate(_w, _h) {
             } else if (i < cHL || j < rHL) {
                 td.className = 'hint';
                 if (i < cHL) {
-                    td.appendChild(document.createTextNode(columnHints[j - rHL][rHL - 1 - i] || ""));
+                    td.appendChild(document.createTextNode(columnHints[j - rHL][cHL - 1 - i] || ""));
                 }
                 if (j < rHL) {
-                    td.appendChild(document.createTextNode(columnHints[i - cHL][cHL - 1 - j] || ""));
+                    td.appendChild(document.createTextNode(rowHints[i - cHL][rHL - 1 - j] || ""));
                 }
             } else {
                 td.className = 'off';
@@ -61,7 +61,7 @@ function checkWin() {
     var rowCheck = true;
     var columnCheck = true;
     for (var i = rHL; i < table.rows.length; i++) {
-        var hints = rowHints[i - rHL];
+        var hints = columnHints[i - rHL];
         index = 0;
         var consecutive = 0;
         var failed = false;
@@ -98,7 +98,7 @@ function checkWin() {
         }
     }
     for (var j = cHL; j < table.rows[0].cells.length; j++) {
-        var hints = columnHints[j - cHL];
+        var hints = rowHints[j - cHL];
         index = 0;
         var consecutive = 0;
         var failed = false;
