@@ -38,7 +38,6 @@ function tableCreate(_w, _h) {
             else if (i < cHL || j < rHL) {
                 td.className = 'hint';
                 if (i < cHL) {
-                    console.log(i, j);
                     td.appendChild(document.createTextNode(columnHints[j - rHL][rHL - 1 - i] || ""));
                 }
                 if (j < rHL) {
@@ -60,12 +59,97 @@ $('#tbl').find('td').on("mousedown mosueover", (function () {
 
 function checkWin() {
     var table = document.getElementById("tbl");
-    for (var i = rHL, row; row = table.rows[i]; i++) {
-        for (var j = cHL, col; col = row.cells[j]; j++) {
-            $(col).toggleClass("on off");
+    //table.rows.length
+    var rowCheck = true;
+    var columnCheck = true;
+    
+    for (var i = rHL; i < table.rows.length; i++) {
+        var hints = rowHints[i - rHL];
+        index = 0;
+        var consecutive = 0;
+        var failed = false;
+        for (var j = cHL; j < table.rows[0].cells.length; j++) {
+            var hint = hints[index];
+            var cell = table.rows[i].cells[j];
+            if ($(cell).hasClass("on")) {
+                consecutive++;
+                if (j == table.rows[0].cells.length - 1) {
+                    if (consecutive != 0) {
+                        if (consecutive == hint) {
+                            consecutive = 0;
+                            index++;
+                        }
+                        else {
+                            failed = true;
+                            break;
+                        }
+                    }
+                }
+            }
+            else {
+                if (consecutive != 0) {
+                    if (consecutive == hint) {
+                        consecutive = 0;
+                        index++;
+                    }
+                    else {
+                        failed = true;
+                        break;
+                    }
+                }
+            }
+        }
+        if (failed || index != hints.length) {
+            rowCheck = false;
         }
     }
-    for (var j = cHL, col; col = row.cells[j]; j++) {
-        for (var i = rHL, row; row = table.rows[i]; i++) {}
+    for (var j = cHL; j < table.rows[0].cells.length; j++) {
+        var hints = columnHints[j - cHL];
+        index = 0;
+        var consecutive = 0;
+        var failed = false;
+        for (var i = rHL; i < table.rows.length; i++) {
+                var hint = hints[index];
+                var cell = table.rows[i].cells[j];
+                if ($(cell).hasClass("on")) {
+                    consecutive++;
+                    if (i == table.rows.length - 1) {
+                        if (consecutive != 0) {
+                            if (consecutive == hint) {
+                                consecutive = 0;
+                                index++;
+                            }
+                            else {
+                                failed = true;
+                                break;
+                            }
+                        }
+                    }
+                }
+                else {
+                    if (consecutive != 0) {
+                        if (consecutive == hint) {
+                            consecutive = 0;
+                            index++;
+                        }
+                        else {
+                            failed = true;
+                            break;
+                        }
+                    }
+                }
+            }
+            if (failed || index != hints.length) {
+                columnCheck = false;
+            }
+        }
+    
+    if (rowCheck && columnCheck){
+        alert("Congrats, you win.");
     }
-}
+        /*
+        for (var j = cHL; j = table.rows[0].cells.length;  j++) {
+            for (var i = rHL, row; row = table.rows[i]; i++) {}
+        }
+        */
+    }
